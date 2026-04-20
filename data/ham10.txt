@@ -1,0 +1,353 @@
+Dear SearchNetworking.com member,
+
+There are several reasons to implement one or many VLANs, including:
+security, layer-3 address management, consolidation of network
+resources, and broadcast control. Read this white paper that
+addresses the challenges that VLANs pose, VLAN maintenance and how to
+troubleshoot and optimize VLAN performance, when necessary.
+
+Click here to download this white paper now: 
+http://go.techtarget.com/r/3215130/2079970
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ABOUT THIS FEATURED WHITE PAPER SPONSORED BY: Fluke Networks  
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Are you looking to implement well-designed VLANs and reduce the
+amount of time required to troubleshoot problems if they occur? This
+white paper details the operational characteristics of VLANs and best
+practices for implementing them. 
+
+Download this white paper now to learn more:
+http://go.techtarget.com/r/3215131/2079970
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+SEARCHNETWORKING.COM WHITE PAPER LIBRARY
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Browse hundreds of white papers by author, keyword or topics.
+Visit the SearchNetworking.com White Paper Library today: 
+http://go.techtarget.com/r/3215132/2079970
+
+___________________________________________________________________
+ABOUT THIS E-NEWSLETTER
+This e-newsletter is published by SearchNetworking.com, a targeted
+Web site from TechTarget, the most targeted IT media and events
+company.  TechTarget offers magazines, Web sites, e-newsletters,
+Webcasts and conferences for enterprise IT professionals.
+
+Copyright 2008 TechTarget. All rights reserved.
+
+_____________________________________________________________________
+
+To unsubscribe from "White Paper Alerts":
+ 
+Go to unsubscribe: http://SearchNetworking.com/u?em=tjm%40cognosys.net&uid=2079970&cid=628786&
+ 
+Please note, unsubscribe requests may take up to 24 hours to process;
+you may receive additional mailings during that time. A confirmation
+e-mail will be sent when your request has been successfully
+processed.
+ 
+Contact us:
+SearchNetworking
+Member Services
+117 Kendrick Street, Suite 800
+Needham, MA 02494
+
+-> END OF EMAIL <-
+
+On Fri, Mar 07, 2008 at 09:47:34AM -0300, Reinaldo de Carvalho wrote: > I get one especific error (from possible SPAM): >  > Mar  6 02:48:37 server postfix/smtpd[10152]: NOQUEUE: reject: RCPT > from bogomil.xenologics.com[212.44.160.10]: 451 4.3.5 Server > configuration problem; from=<> to= > proto=ESMTP helo= > 	 > I think ldap_dict is not handling character "=" correctly before ldap > query. "xyjx=okkumef=980e81275@example.br" should get "user unknown". You show no evidence to support this claim. You are not looking at or reporting the log messages that detail the problem. > Postfix 2.3.8 LDAP queries with this address work for me. $ postmap -vq xyjx=okkumef=980e81275@example.br ldap:/tmp/ldap.cf . postmap: dict_ldap_connect: Actual Protocol version used is 2. postmap: dict_ldap_connect: Cached connection handle for LDAP source /tmp/ldap.cf postmap: dict_ldap_lookup: /tmp/ldap.cf: Searching with filter nruqkzsqpdlvreojnruq=kzsq=pdlvreo=957u04124@example.br postmap: dict_ldap_get_values[1]: Search found 0 match(es) postmap: dict_ldap_get_values[1]: Leaving dict_ldap_get_values postmap: dict_ldap_lookup: Search returned nothing --  	Viktor. Disclaimer: off-list followups get on-list replies or get ignored. Please do not ignore the "Reply-To" header. To unsubscribe from the postfix-users list, visit http://www.postfix.org/lists.html or click the link below: If my response solves your problem, the best way to thank me is to not send an "it worked, thanks" follow-up. If you must respond, please put "It worked, thanks" in the "Subject" so I can delete these quickly.
+
+-> END OF EMAIL <-
+
+Forgot to CC ilug.
+
+On 11/19/07, Rory Browne  wrote:
+> at the risk of exposing my lack of experience with CGI.pm, I think
+> this would be easier in PHP. Here's an example.
+>
+>  if( array_key_exists('upload', $_FILES) ){
+> $msg = move_uploaded_file($_FILES['upload']['tmp_nam'], '/path/to/store') ?
+>  "File uploaded Successfully" : "File upload failed";
+> echo $msg;
+> } else { ?>
+>  method="POST" enctype="multipart/form-data"> name="upload"> value="Upload">
+>  ?>
+>
+> I know this is both crap code, and it produces crap html - it's only
+> an example, and was written up in a textarea in gmail. Bear in mind
+> it's a while since I've done this. I haven't tried to make it pretty
+> or secure.
+>
+> On 11/17/07, John A. Kinsella  wrote:
+> > Hi Justin,
+> > thanks for reply.
+> >
+> > I'm certainly not *teaching* Perl/cgi/html.
+> >
+> > (I have this crazy idea that I should only teach stuff I understand...)
+> >
+> > I'm only an 'umble mathematics lecturer that wants his students to be able
+> > to upload files to his server.
+> >
+> > I used to use smb to create an "NT share" but because ul has reconfigured
+> > its network setup this (html+cgi script) was easiest solution...
+> >
+> > I can live with it not being cool.... :-)
+> >
+> > John
+> >
+> > John A. Kinsella		Ph: 	+353-61-202148 		(Direct)
+> >  					+353-61-333644 x 2148  	(Switch)
+> > Mathematics Dept.		e-mail: aikv.qhbldaba@ul.ie
+> > University of Limerick		FAX: 	+353-61-334927
+> > IRELAND				Web:    http://jkcray.maths.ul.ie
+> >
+> > On Fri, 16 Nov 2007, Justin Kelly wrote:
+> >
+> > > OK, It's been a while since I wrote cgi scripts but I seem to remember
+> > > this much:
+> > >
+> > > use CGI qw(param);
+> > >
+> > > Then you can use $param->('whatever');
+> > >
+> > > I don't think the word param goes in quotes but try it both ways to see
+> > > what works.
+> > >
+> > > I hope you are not suggesting to your students that they should actually
+> > > use cgi. That's, like, soooo 20th century... Like, not cool at all!!!
+> > >
+> > > JK
+> > > --
+> > > Irish Linux Users' Group mailing list
+> > > About this list : http://mail.linux.ie/mailman/listinfo/ilug
+> > > Who we are : http://www.linux.ie/
+> > > Where we are : http://www.linux.ie/map/
+> > >
+> > --
+> > Irish Linux Users' Group mailing list
+> > About this list : http://mail.linux.ie/mailman/listinfo/ilug
+> > Who we are : http://www.linux.ie/
+> > Where we are : http://www.linux.ie/map/
+> >
+>
+
+-> END OF EMAIL <-
+
+There are still various places in RC1 that use perl59 instead of perl510,
+e.g. on MSWin32 perl.exe links against perl59.dll.
+
+Attached patch changes all occurrences of "perl59" that I could find, and
+that seem to imply Perl 5.9, into "perl510".
+
+Cheers,
+-Jan
+
+-> END OF EMAIL <-
+
+Am 2008-02-28 15:30:43, schrieb Mike Jackson:
+> Not "nearly impossible." I work daily with people who run servers 
+> exactly like that, yet spam of all sorts is spewing from their mail 
+> queues. Most of the ones I see are SMTP accounts with weak passwords. 
+> The spammers authenticate as the users and bam, the server is a spam source.
+
+This would be definitivly noticed since I have (annonym) statistics of
+send/received messages per account.  So if there is one $USER getting
+normaly 10 messages a day and then one day he/she get 100, the account
+is probably victim of a spamer and a SOS script inform me immediatlly
+to check the status...
+
+The same is for sending messages...  There are not realy much peoples
+sending more then 10 messages per HOUR.  So a hijacked account would
+me immediatly send me a SOS message...
+
+> With Hotmail, make sure that you have a reverse DNS record for your 
+> server's sending IP, that the A record for that name resolves to the 
+> same IP, and that your SMTP banner greeting lists the same name. Also, 
+
+Yeah, this is all working for some years now...
+
+> if you use SPF records, do not use the PTR option - they reject mail 
+> from domains that contain that option.
+
+I do not use it...
+
+Thanks, Greetings and nice Day
+    Michelle Konzack
+    Systemadministrator
+    24V Electronic Engineer
+    Tamay Dogan Network
+    Debian GNU/Linux Consultant
+
+
+-- 
+Linux-User #280138 with the Linux Counter, http://counter.li.org/
+##################### Debian GNU/Linux Consultant #####################
+Michelle Konzack   Apt. 917                  ICQ #328449886
++49/177/9351947    50, rue de Soultz         MSN LinuxMichi
++33/6/61925193     67100 Strasbourg/France   IRC #Debian (irc.icq.com)
+
+-> END OF EMAIL <-
+
+How do I cancel my account.  I want to erase it completely!
+
+account name:  sfstreetart
+
+Thanks
+
+ROB
+
+-> END OF EMAIL <-
+
+I don't use virtual hosts. Here is the entry of the
+/var/log/apache2/error_log file when entering "curl
+https://localhost":
+
+[Fri Mar 07 16:38:00 2008] [error] [client 127.0.0.1] Invalid method
+in request \\x80v\\x01\\x03\\x01
+
+
+
+On Fri, Mar 7, 2008 at 4:28 PM, Nick Zeljkovic  wrote:
+> I have done that already, but still I am not able to use apache with SSL.
+>
+>  "curl https://localhost" returns:
+>  curl: (35) error:140770FC:SSL routines:SSL23_GET_SERVER_HELLO:unknown
+>  protocol
+>
+>  I need to authenticate users willing to interact with a subversion
+>  repository through the apache server. In my case
+>  APACHE_SERVER_FLAGS="SSL  SVN_VIEWCVS" since I use ViewVC to browse
+>  the repositories.
+>
+>  
+>
+>  Have you configured SSL vhost too ? What does error_log say ?
+>  (/var/log/apache2/error_log) There should be a SSL template in
+>  /etc/apache2/vhosts.d which you can modify.
+>
+>  --
+>  Nick zeljkovic
+>
+>  --
+>
+
+
+
+You'll need to set one up for SSL, generate key/certificate and configure
+virtualhost to use that newly generated certificate.
+
+--
+Nick Zeljkovic
+
+-> END OF EMAIL <-
+
+Hello there ! 
+Great work on the slide show viewer application. I was wondering if  we would be able to somehow  use use the up down arrow keys for navigating to different slide shows on the same page and then left right arrow keys to move  to the next and previous photos.
+ 
+rgds
+Abhijit
+
+-> END OF EMAIL <-
+
+Mail from sender , coming from intuit.com
+servers 206.154.105.168, 169, 170, subject "TurboTax: Your New Account
+Has Been Created", is hitting DATE_SPAMWARE_Y2K and INVALID_DATE.
+This is about 4.3 just for the two DATE hits, although they don't
+seem to hit anything else.
+
+It's amazing to see 2-digit years at this late date.  But not unique.
+The Educational Testing Service sends SAT scores to colleges from an
+ancient mainframe system that uses 2-digit years.  We had to whitelist
+them to make sure they get through.  (We have an ancient mainframe too
+but it writes 4-digit years!)
+
+Joseph Brennan
+Columbia University Information Technology
+
+-> END OF EMAIL <-
+
+Dear fellow Pythonistas!
+
+Guido has accepted my user site directory PEP today.
+http://python.org/dev/peps/pep-0370/
+
+I'm about the merge the code. But first I like to let you know some
+things and get your opinion.
+
+The location of the user site-package directory stays as written in my
+PEP. The master himself said "The location will be somewhere under
+~/.local for Unix/Linux/OS X, and %APPDATA%/Python for Windows (per the
+original proposal in the PEP)." Please do NOT take my check-in message
+as an opportunity to start yet the third bike shed discussion. Thank you
+very much! :)
+
+The PEP adds two environment vars to adjust the location of the user
+site directory to your liking or to disable the feature entirely. If you
+are still not convinced you are better off by adding a single line to
+your .profile file.
+
+For now the unit tests are creating the user site directory tree. I'm
+going to chance that in a few days unless everybody is fine with it.
+
+The docs aren't finished yet. Unless somebody is faster than me (*wink*)
+I'm going to work on the docs after I've finished the rework of the json
+module. As Brett suggested I'm going to module its input and return
+values after the pickle module before I merge it into the py3k branch.
+It's currently mixing unicode and str in a way which is not compatible
+with py3k.
+
+I've added some additional code to the site module. It should become in
+handy for scripters, debugging and unit tests:
+
+$ ./python -m site
+sys.path = [
+    '/home/heimes/dev/python/trunk',
+    '/usr/local/lib/python26.zip',
+    '/home/heimes/dev/python/trunk/Lib',
+    '/home/heimes/dev/python/trunk/Lib/plat-linux2',
+    '/home/heimes/dev/python/trunk/Lib/lib-tk',
+    '/home/heimes/dev/python/trunk/Modules',
+    '/home/heimes/dev/python/trunk/build/lib.linux-i686-2.6-pydebug',
+    '/home/heimes/.local/lib/python2.6/site-packages',
+]
+USER_BASE: '/home/heimes/.local' (exists)
+USER_SITE: '/home/heimes/.local/lib/python2.6/site-packages' (exists)
+ENABLE_USER_SITE: True
+
+
+$ ./python -m site --help
+/home/heimes/dev/python/trunk/Lib/site.py [--user-base] [--user-site]
+
+Without arguments print some useful information
+With arguments print the value of USER_BASE and/or USER_SITE separated
+by ':'.
+
+Exit codes with --user-base or --user-site:
+  0 - user site directory is enabled
+  1 - user site diretory is disabled by user
+  2 - uses site directory is disabled by super user
+      or for security reasons
+ >2 - unknown error
+
+
+$ ./python -m site --user-base --user-site
+/home/heimes/.local:/home/heimes/.local/lib/python2.6/site-packages
+$ echo $?
+0
+
+$ ./python -s -m site --user-base --user-site
+/home/heimes/.local:/home/heimes/.local/lib/python2.6/site-packages
+$ echo $?
+1
+
+
+Christian
+_______________________________________________
+Python-Dev mailing list
+zvllln-eum@python.org
+http://mail.python.org/mailman/listinfo/python-dev
+Unsubscribe: http://mail.python.org/mailman/options/python-dev/python-dev%40tangomu.com
+
+-> END OF EMAIL <-
+
