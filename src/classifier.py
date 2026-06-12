@@ -181,15 +181,19 @@ def plot_confusion_matrix(y_true, y_pred, model_name: str):
     plt.close()
  
  
-def evaluate(pipeline: Pipeline, X_test, y_test, model_name: str):
+def evaluate(pipeline: Pipeline, X_test, y_test, model_name: str) -> float: #N: added return type for F1 score
     y_pred = pipeline.predict(X_test)
+
     print(f"\n{'='*50}")
     print(f"  {model_name}")
     print(f"{'='*50}")
     print(f"  Accuracy : {accuracy_score(y_test, y_pred):.4f}")
     print()
     print(classification_report(y_test, y_pred, target_names=["Ham", "Spam"]))
+
     plot_confusion_matrix(y_test, y_pred, model_name)
+
+    return f1_score(y_test, y_pred) #N: pleon epistrefei F1 score gia na mhn ksanaginetai prediction
  
 
 #main function
@@ -217,7 +221,7 @@ def main():
  
         #final fit on full training set
         pipeline.fit(X_train, y_train)
-        evaluate(pipeline, X_test, y_test, name)
+        
  
  #G
  #acc = accuracy_score(y_test, pipeline.predict(X_test))
@@ -227,9 +231,12 @@ def main():
 
     # G: L5 (Zarras): επιλογή best model με F1, όχι accuracy
     # G: Accuracy παραπλανά σε imbalanced data — F1 συνεπές με cross-val
-        f1 = f1_score(y_test, pipeline.predict(X_test))
-        if f1 > best_f1:
-            best_f1, best_name, best_pipeline = f1, name, pipeline
+        test_f1 = evaluate(pipeline, X_test, y_test, name)  #N: upologizoume f1
+
+        if test_f1 > best_f1:
+            best_f1 = test_f1
+            best_name = name
+            best_pipeline = pipeline
         
     #save best model
     model_path = MODEL_DIR / "best_model.joblib"

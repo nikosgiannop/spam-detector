@@ -181,8 +181,8 @@ def multi_turn_demo(email_body: str, email_type: str, rounds: int = 2) -> list[d
     #continue the conversation with each follow-up
     for i in range(min(rounds, len(follow_ups))):
         msg = follow_ups[i]
-        history.append({"role": "user", "content": msg})
-        next_reply = generate_reply(msg, email_type, history[:-1])
+        next_reply = generate_reply(msg, email_type, history)   # history has previous turns only
+        history.append({"role": "user",      "content": msg})   # append after
         history.append({"role": "assistant", "content": next_reply})
 
     return history

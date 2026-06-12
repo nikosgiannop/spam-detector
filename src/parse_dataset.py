@@ -165,7 +165,7 @@ def parse_file(filepath: Path, label: int) -> list[dict]:
     #convert into structured records        
     #return [{"text": email, "label": label} for email in emails] ειναι για να βγει!!
     #G το αλλαξα για να γινεται και η κληση της clean_email KAI extract_entities:
-    return [{"text": extract_entities(clean_email(email)), "label": label} for email in emails]
+    return [{"text": clean_email(extract_entities(email)), "label": label} for email in emails] #N: first extract entities, then clean text, alliws to NER tha eixe thema
 
  
 def build_dataset() -> pd.DataFrame:
@@ -197,7 +197,8 @@ if __name__ == "__main__":
     print(f"Ham  (0)     : {(df.label == 0).sum()}")
     print(f"Spam (1)     : {(df.label == 1).sum()}")
     print(f"\nSample:\n{df.head(3)}")
- 
+    
+    DATA_DIR.mkdir(exist_ok=True)   #N: ensure data directory exists before saving
     out = DATA_DIR / "emails.csv"
     df.to_csv(out, index=False)
     print(f"\nSaved to {out}")
