@@ -14,6 +14,8 @@ G:   classifier.py     → emails.csv → TF-IDF features → model → evaluati
 """
  
 #dependencies/imports
+from cProfile import label
+
 import pandas as pd
 import re                    #G NEW ADDITION
 import spacy                 #G NEW ADDITION: named entity extraction (Task 2)
@@ -165,8 +167,10 @@ def parse_file(filepath: Path, label: int) -> list[dict]:
     #convert into structured records        
     #return [{"text": email, "label": label} for email in emails] ειναι για να βγει!!
     #G το αλλαξα για να γινεται και η κληση της clean_email KAI extract_entities:
-    return [{"text": clean_email(extract_entities(email)), "label": label} for email in emails] #N: first extract entities, then clean text, alliws to NER tha eixe thema
-
+    return [{"text": extract_entities(clean_email(email)), "label": label} for email in emails] #clean_email runs first (lowercase) — improves spaCy NER on ALL CAPS dataset
+                                                                                                #Verified empirically: extract_entities first gives 0% coverage on this data
+    #N: WITHOUT entities (for test) to ekana egw.
+    #return [{"text": clean_email(email), "label": label} for email in emails]
  
 def build_dataset() -> pd.DataFrame:
     records = []
