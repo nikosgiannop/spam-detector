@@ -212,7 +212,7 @@ def interactive_mode(pipeline): #pros8esa auto to function pou sou epitrepei na 
 
     #classify the email and show the verdict
     verdict = classify_email(pipeline, email_body)
-    verdict_str = "SPAM/SCAM ✓" if verdict == 1 else "HAM (legitimate)"
+    verdict_str = "SPAM/SCAM" if verdict == 1 else "HAM (legitimate)"
     print(f"\nClassifier verdict: {verdict_str}")
 
     if verdict == 0:
@@ -226,7 +226,7 @@ def interactive_mode(pipeline): #pros8esa auto to function pou sou epitrepei na 
     choice = input("Enter 1 or 2: ").strip()
 
     email_type = "spam" if choice == "1" else "scam"
-    authority  = "EDCB" if email_type == "spam" else "OICV"
+    authority  = "Theodore" if email_type == "spam" else "Patricia"
 
     print("\nGenerating reply...")
     reply = generate_reply(email_body, email_type)
@@ -284,7 +284,7 @@ def interactive_mode(pipeline): #pros8esa auto to function pou sou epitrepei na 
 def run_category(pipeline, emails: list[str], email_type: str):
     """Classify and reply to a list of emails of a given type."""
     label_str = "SPAM" if email_type == "spam" else "SCAM"
-    authority  = "EDCB" if email_type == "spam" else "OICV"
+    authority  = "Theodore" if email_type == "spam" else "Patricia"
 
     print(f"\n{'═' * 70}")
     print(f"  {label_str} EMAILS  ->  {authority} auto-reply")
@@ -344,7 +344,7 @@ def main():
     print(f"{'═' * 70}")
 
     for email_type, body in [("spam", spam_emails[0]), ("scam", nigerian_emails[0])]:
-        authority = "EDCB" if email_type == "spam" else "OICV"
+        authority = "Theodore" if email_type == "spam" else "Patricia"
         print(f"\n--- {email_type.upper()} multi-turn ({authority}) ---")
         history = multi_turn_demo(body, email_type, rounds=2)
         for turn in history:
