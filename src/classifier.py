@@ -66,7 +66,7 @@ MODEL_DIR.mkdir(exist_ok=True)
  
 DATASET   = DATA_DIR / "emails.csv"
 TEST_SIZE = 0.2       #80% train, 20% test (allakste to an den sas aresei)
-RANDOM_STATE = 42       #orisa to random state gia reproducibility
+RANDOM_STATE = 42     #orisa to random state gia reproducibility
  
 #load data function
 def load_data():

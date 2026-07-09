@@ -1,0 +1,445 @@
+Ran in the order:
+
+Run 1: alpha=0.01  → NB CV F1: 0.9633
+Run 2: alpha=0.05  → NB CV F1: 0.9667
+Run 3: alpha=0.1   → NB CV F1: 0.9679  
+Run 4: alpha=0.5   → NB CV F1: 0.9795
+Run 5: alpha=1.0   → NB CV F1: 0.9755
+
+
+PS D:\RANDOM\programming\AiProject\spam-detector> python src/classifier.py 
+Loaded 1080 emails  (ham=500, spam=580)
+Train: 864  |  Test: 216
+
+[Naive Bayes] Cross-val F1: 0.9633 ± 0.0091
+
+==================================================
+  Naive Bayes
+==================================================
+  Accuracy : 0.9676
+
+              precision    recall  f1-score   support
+
+         Ham       0.93      1.00      0.97       100
+        Spam       1.00      0.94      0.97       116
+
+    accuracy                           0.97       216
+   macro avg       0.97      0.97      0.97       216
+weighted avg       0.97      0.97      0.97       216
+
+  Saved confusion matrix in models\confusion_naive_bayes.png
+
+[Linear SVM] Cross-val F1: 0.9779 ± 0.0079
+
+==================================================
+  Linear SVM
+==================================================
+  Accuracy : 0.9907
+
+              precision    recall  f1-score   support
+
+         Ham       0.98      1.00      0.99       100
+        Spam       1.00      0.98      0.99       116
+
+    accuracy                           0.99       216
+   macro avg       0.99      0.99      0.99       216
+weighted avg       0.99      0.99      0.99       216
+
+  Saved confusion matrix in models\confusion_linear_svm.png
+
+Best model: Linear SVM (F1=0.9913)
+Saved to models\best_model.joblib
+PS D:\RANDOM\programming\AiProject\spam-detector> python src/classifier.py
+Loaded 1080 emails  (ham=500, spam=580)
+Train: 864  |  Test: 216
+
+[Naive Bayes] Cross-val F1: 0.9667 ± 0.0113
+
+==================================================
+  Naive Bayes
+==================================================
+  Accuracy : 0.9676
+
+              precision    recall  f1-score   support
+
+         Ham       0.93      1.00      0.97       100
+        Spam       1.00      0.94      0.97       116
+
+    accuracy                           0.97       216
+   macro avg       0.97      0.97      0.97       216
+weighted avg       0.97      0.97      0.97       216
+
+  Saved confusion matrix in models\confusion_naive_bayes.png
+
+[Linear SVM] Cross-val F1: 0.9779 ± 0.0079
+
+==================================================
+  Linear SVM
+==================================================
+  Accuracy : 0.9907
+
+              precision    recall  f1-score   support
+
+         Ham       0.98      1.00      0.99       100
+        Spam       1.00      0.98      0.99       116
+
+    accuracy                           0.99       216
+   macro avg       0.99      0.99      0.99       216
+weighted avg       0.99      0.99      0.99       216
+
+  Saved confusion matrix in models\confusion_linear_svm.png
+
+Best model: Linear SVM (F1=0.9913)
+Saved to models\best_model.joblib
+PS D:\RANDOM\programming\AiProject\spam-detector> python src/classifier.py
+Loaded 1080 emails  (ham=500, spam=580)
+Train: 864  |  Test: 216
+
+[Naive Bayes] Cross-val F1: 0.9679 ± 0.0096
+
+==================================================
+  Naive Bayes
+==================================================
+  Accuracy : 0.9722
+
+              precision    recall  f1-score   support
+
+         Ham       0.94      1.00      0.97       100
+        Spam       1.00      0.95      0.97       116
+
+    accuracy                           0.97       216
+   macro avg       0.97      0.97      0.97       216
+weighted avg       0.97      0.97      0.97       216
+
+  Saved confusion matrix in models\confusion_naive_bayes.png
+
+[Linear SVM] Cross-val F1: 0.9779 ± 0.0079
+
+==================================================
+  Linear SVM
+==================================================
+  Accuracy : 0.9907
+
+              precision    recall  f1-score   support
+
+         Ham       0.98      1.00      0.99       100
+        Spam       1.00      0.98      0.99       116
+
+    accuracy                           0.99       216
+   macro avg       0.99      0.99      0.99       216
+weighted avg       0.99      0.99      0.99       216
+
+  Saved confusion matrix in models\confusion_linear_svm.png
+
+Best model: Linear SVM (F1=0.9913)
+Saved to models\best_model.joblib
+PS D:\RANDOM\programming\AiProject\spam-detector> python src/classifier.py
+Loaded 1080 emails  (ham=500, spam=580)
+Train: 864  |  Test: 216
+
+[Naive Bayes] Cross-val F1: 0.9795 ± 0.0086
+
+==================================================
+  Naive Bayes
+==================================================
+  Accuracy : 0.9861
+
+              precision    recall  f1-score   support
+
+         Ham       0.98      0.99      0.99       100
+        Spam       0.99      0.98      0.99       116
+
+    accuracy                           0.99       216
+   macro avg       0.99      0.99      0.99       216
+weighted avg       0.99      0.99      0.99       216
+
+  Saved confusion matrix in models\confusion_naive_bayes.png
+
+[Linear SVM] Cross-val F1: 0.9779 ± 0.0079
+
+==================================================
+  Linear SVM
+==================================================
+  Accuracy : 0.9907
+
+              precision    recall  f1-score   support
+
+         Ham       0.98      1.00      0.99       100
+        Spam       1.00      0.98      0.99       116
+
+    accuracy                           0.99       216
+   macro avg       0.99      0.99      0.99       216
+weighted avg       0.99      0.99      0.99       216
+
+  Saved confusion matrix in models\confusion_linear_svm.png
+
+Best model: Linear SVM (F1=0.9913)
+Saved to models\best_model.joblib
+PS D:\RANDOM\programming\AiProject\spam-detector> python src/classifier.py
+Loaded 1080 emails  (ham=500, spam=580)
+Train: 864  |  Test: 216
+
+[Naive Bayes] Cross-val F1: 0.9755 ± 0.0109
+
+==================================================
+  Naive Bayes
+==================================================
+  Accuracy : 0.9861
+
+              precision    recall  f1-score   support
+
+         Ham       0.99      0.98      0.98       100
+        Spam       0.98      0.99      0.99       116
+
+    accuracy                           0.99       216
+   macro avg       0.99      0.99      0.99       216
+weighted avg       0.99      0.99      0.99       216
+
+  Saved confusion matrix in models\confusion_naive_bayes.png
+
+[Linear SVM] Cross-val F1: 0.9779 ± 0.0079
+
+==================================================
+  Linear SVM
+==================================================
+  Accuracy : 0.9907
+
+              precision    recall  f1-score   support
+
+         Ham       0.98      1.00      0.99       100
+        Spam       1.00      0.98      0.99       116
+
+    accuracy                           0.99       216
+   macro avg       0.99      0.99      0.99       216
+weighted avg       0.99      0.99      0.99       216
+
+  Saved confusion matrix in models\confusion_linear_svm.png
+
+Best model: Linear SVM (F1=0.9913)
+Saved to models\best_model.joblib
+
+Ran in the order:
+
+LinearSVC(C=0.1)    
+LinearSVC(C=0.5)    
+LinearSVC(C=1.0)    
+LinearSVC(C=5.0)    
+LinearSVC(C=10.0)
+
+
+PS D:\RANDOM\programming\AiProject\spam-detector> python src/classifier.py
+Loaded 1080 emails  (ham=500, spam=580)
+Train: 864  |  Test: 216
+
+[Naive Bayes] Cross-val F1: 0.9679 ± 0.0096
+
+==================================================
+  Naive Bayes
+==================================================
+  Accuracy : 0.9722
+
+              precision    recall  f1-score   support
+
+         Ham       0.94      1.00      0.97       100
+        Spam       1.00      0.95      0.97       116
+
+    accuracy                           0.97       216
+   macro avg       0.97      0.97      0.97       216
+weighted avg       0.97      0.97      0.97       216
+
+  Saved confusion matrix in models\confusion_naive_bayes.png
+
+[Linear SVM] Cross-val F1: 0.9490 ± 0.0075
+
+==================================================
+  Linear SVM
+==================================================
+  Accuracy : 0.9630
+
+              precision    recall  f1-score   support
+
+         Ham       0.93      1.00      0.96       100
+        Spam       1.00      0.93      0.96       116
+
+    accuracy                           0.96       216
+   macro avg       0.96      0.97      0.96       216
+weighted avg       0.97      0.96      0.96       216
+
+  Saved confusion matrix in models\confusion_linear_svm.png
+
+Best model: Naive Bayes (F1=0.9735)
+Saved to models\best_model.joblib
+PS D:\RANDOM\programming\AiProject\spam-detector> python src/classifier.py
+Loaded 1080 emails  (ham=500, spam=580)
+Train: 864  |  Test: 216
+
+[Naive Bayes] Cross-val F1: 0.9679 ± 0.0096
+
+==================================================
+  Naive Bayes
+==================================================
+  Accuracy : 0.9722
+
+              precision    recall  f1-score   support
+
+         Ham       0.94      1.00      0.97       100
+        Spam       1.00      0.95      0.97       116
+
+    accuracy                           0.97       216
+   macro avg       0.97      0.97      0.97       216
+weighted avg       0.97      0.97      0.97       216
+
+  Saved confusion matrix in models\confusion_naive_bayes.png
+
+[Linear SVM] Cross-val F1: 0.9700 ± 0.0076
+
+==================================================
+  Linear SVM
+==================================================
+  Accuracy : 0.9769
+
+              precision    recall  f1-score   support
+
+         Ham       0.95      1.00      0.98       100
+        Spam       1.00      0.96      0.98       116
+
+    accuracy                           0.98       216
+   macro avg       0.98      0.98      0.98       216
+weighted avg       0.98      0.98      0.98       216
+
+  Saved confusion matrix in models\confusion_linear_svm.png
+
+Best model: Linear SVM (F1=0.9780)
+Saved to models\best_model.joblib
+PS D:\RANDOM\programming\AiProject\spam-detector> python src/classifier.py
+Loaded 1080 emails  (ham=500, spam=580)
+Train: 864  |  Test: 216
+
+[Naive Bayes] Cross-val F1: 0.9679 ± 0.0096
+
+==================================================
+  Naive Bayes
+==================================================
+  Accuracy : 0.9722
+
+              precision    recall  f1-score   support
+
+         Ham       0.94      1.00      0.97       100
+        Spam       1.00      0.95      0.97       116
+
+    accuracy                           0.97       216
+   macro avg       0.97      0.97      0.97       216
+weighted avg       0.97      0.97      0.97       216
+
+  Saved confusion matrix in models\confusion_naive_bayes.png
+
+[Linear SVM] Cross-val F1: 0.9779 ± 0.0079
+
+==================================================
+  Linear SVM
+==================================================
+  Accuracy : 0.9907
+
+              precision    recall  f1-score   support
+
+         Ham       0.98      1.00      0.99       100
+        Spam       1.00      0.98      0.99       116
+
+    accuracy                           0.99       216
+   macro avg       0.99      0.99      0.99       216
+weighted avg       0.99      0.99      0.99       216
+
+  Saved confusion matrix in models\confusion_linear_svm.png
+
+Best model: Linear SVM (F1=0.9913)
+Saved to models\best_model.joblib
+PS D:\RANDOM\programming\AiProject\spam-detector> python src/classifier.py
+Loaded 1080 emails  (ham=500, spam=580)
+Train: 864  |  Test: 216
+
+[Naive Bayes] Cross-val F1: 0.9679 ± 0.0096
+
+==================================================
+  Naive Bayes
+==================================================
+  Accuracy : 0.9722
+
+              precision    recall  f1-score   support
+
+         Ham       0.94      1.00      0.97       100
+        Spam       1.00      0.95      0.97       116
+
+    accuracy                           0.97       216
+   macro avg       0.97      0.97      0.97       216
+weighted avg       0.97      0.97      0.97       216
+
+  Saved confusion matrix in models\confusion_naive_bayes.png
+
+[Linear SVM] Cross-val F1: 0.9814 ± 0.0102
+
+==================================================
+  Linear SVM
+==================================================
+  Accuracy : 0.9907
+
+              precision    recall  f1-score   support
+
+         Ham       0.98      1.00      0.99       100
+        Spam       1.00      0.98      0.99       116
+
+    accuracy                           0.99       216
+   macro avg       0.99      0.99      0.99       216
+weighted avg       0.99      0.99      0.99       216
+
+  Saved confusion matrix in models\confusion_linear_svm.png
+
+Best model: Linear SVM (F1=0.9913)
+Saved to models\best_model.joblib
+PS D:\RANDOM\programming\AiProject\spam-detector> python classifier.py
+C:\Python312\python.exe: can't open file 'D:\\RANDOM\\programming\\AiProject\\spam-detector\\classifier.py': [Errno 2] No such file or directory
+PS D:\RANDOM\programming\AiProject\spam-detector> python src/classifier.py
+Loaded 1080 emails  (ham=500, spam=580)
+Train: 864  |  Test: 216
+
+[Naive Bayes] Cross-val F1: 0.9679 ± 0.0096
+
+==================================================
+  Naive Bayes
+==================================================
+  Accuracy : 0.9722
+
+              precision    recall  f1-score   support
+
+         Ham       0.94      1.00      0.97       100
+        Spam       1.00      0.95      0.97       116
+
+    accuracy                           0.97       216
+   macro avg       0.97      0.97      0.97       216
+weighted avg       0.97      0.97      0.97       216
+
+  Saved confusion matrix in models\confusion_naive_bayes.png
+
+[Linear SVM] Cross-val F1: 0.9814 ± 0.0102
+
+==================================================
+  Linear SVM
+==================================================
+  Accuracy : 0.9907
+
+              precision    recall  f1-score   support
+
+         Ham       0.98      1.00      0.99       100
+        Spam       1.00      0.98      0.99       116
+
+    accuracy                           0.99       216
+   macro avg       0.99      0.99      0.99       216
+weighted avg       0.99      0.99      0.99       216
+
+  Saved confusion matrix in models\confusion_linear_svm.png
+
+Best model: Linear SVM (F1=0.9913)
+Saved to models\best_model.joblib
+
+
+
+   

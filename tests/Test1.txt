@@ -1,0 +1,159 @@
+PS D:\RANDOM\programming\AiProject\spam-detector> python src/parse_dataset.py
+Parsing dataset...
+  Loaded  500 emails  (label=0)  ← ham500.txt
+  Loaded  100 emails  (label=1)  ← spam100.txt
+  Loaded  400 emails  (label=1)  ← nigerian_format400.txt
+  Loaded   80 emails  (label=1)  ← nigerian_format80.txt
+
+Total emails : 1080
+Ham  (0)     : 500
+Spam (1)     : 580
+
+Sample:
+                                                text  label
+0  crusador e-alert for february 9, 2008 our late...      0
+1  perfect rx discounts URL between decorator, fa...      1
+2  this message is a mime encoded email and it in...      1
+
+Saved to data\emails.csv
+
+=== Entity Coverage ===
+Ham  with entities: 97.2%
+Spam with entities: 96.9%
+
+=== Top Entities in SPAM ===
+  ENT_CARDINAL         3487
+  ENT_PERSON           2388
+  ENT_ORG              1557
+  ENT_GPE              1345
+  ENT_DATE             1340
+  ENT_PERCENT          948
+  ENT_MONEY            521
+  ENT_NORP             486
+  ENT_ORDINAL          406
+  ENT_LOC              184
+
+=== Top Entities in HAM ===
+  ENT_DATE             10084
+  ENT_CARDINAL         8692
+  ENT_PERSON           1666
+  ENT_ORG              1119
+  ENT_GPE              665
+  ENT_NORP             392
+  ENT_TIME             362
+  ENT_MONEY            336
+  ENT_ORDINAL          178
+  ENT_PERCENT          92
+PS D:\RANDOM\programming\AiProject\spam-detector> python src/classifier.py
+Loaded 1080 emails  (ham=500, spam=580)
+Train: 864  |  Test: 216
+
+[Naive Bayes] Cross-val F1: 0.9679 ± 0.0096
+
+==================================================
+  Naive Bayes
+==================================================
+  Accuracy : 0.9722
+
+              precision    recall  f1-score   support
+
+         Ham       0.94      1.00      0.97       100
+        Spam       1.00      0.95      0.97       116
+
+    accuracy                           0.97       216
+   macro avg       0.97      0.97      0.97       216
+weighted avg       0.97      0.97      0.97       216
+
+  Saved confusion matrix in models\confusion_naive_bayes.png
+
+[Linear SVM] Cross-val F1: 0.9779 ± 0.0079
+
+==================================================
+  Linear SVM
+==================================================
+  Accuracy : 0.9907
+
+              precision    recall  f1-score   support
+
+         Ham       0.98      1.00      0.99       100
+        Spam       1.00      0.98      0.99       116
+
+    accuracy                           0.99       216
+   macro avg       0.99      0.99      0.99       216
+weighted avg       0.99      0.99      0.99       216
+
+  Saved confusion matrix in models\confusion_linear_svm.png
+
+Best model: Linear SVM (F1=0.9913)
+Saved to models\best_model.joblib
+
+FIRST ONE IS WITH ENTITIES, SECOND WITHOUT
+
+PS D:\RANDOM\programming\AiProject\spam-detector> python src/parse_dataset.py
+Parsing dataset...
+  Loaded  500 emails  (label=0)  ← ham500.txt
+  Loaded  100 emails  (label=1)  ← spam100.txt
+  Loaded  400 emails  (label=1)  ← nigerian_format400.txt
+  Loaded   80 emails  (label=1)  ← nigerian_format80.txt
+
+Total emails : 1080
+Ham  (0)     : 500
+Spam (1)     : 580
+
+Sample:
+                                                text  label
+0  crusador e-alert for february 9, 2008 our late...      0
+1  perfect rx discounts URL between decorator, fa...      1
+2  this message is a mime encoded email and it in...      1
+
+Saved to data\emails.csv
+
+=== Entity Coverage ===
+Ham  with entities: 0.0%
+Spam with entities: 0.0%
+
+=== Top Entities in SPAM ===
+
+=== Top Entities in HAM ===
+PS D:\RANDOM\programming\AiProject\spam-detector> python src/classifier.py
+Loaded 1080 emails  (ham=500, spam=580)
+Train: 864  |  Test: 216
+
+[Naive Bayes] Cross-val F1: 0.9679 ± 0.0089
+
+==================================================
+  Naive Bayes
+==================================================
+  Accuracy : 0.9722
+
+              precision    recall  f1-score   support
+
+         Ham       0.94      1.00      0.97       100
+        Spam       1.00      0.95      0.97       116
+
+    accuracy                           0.97       216
+   macro avg       0.97      0.97      0.97       216
+weighted avg       0.97      0.97      0.97       216
+
+  Saved confusion matrix in models\confusion_naive_bayes.png
+
+[Linear SVM] Cross-val F1: 0.9725 ± 0.0071
+
+==================================================
+  Linear SVM
+==================================================
+  Accuracy : 0.9815
+
+              precision    recall  f1-score   support
+
+         Ham       0.96      1.00      0.98       100
+        Spam       1.00      0.97      0.98       116
+
+    accuracy                           0.98       216
+   macro avg       0.98      0.98      0.98       216
+weighted avg       0.98      0.98      0.98       216
+
+  Saved confusion matrix in models\confusion_linear_svm.png
+
+Best model: Linear SVM (F1=0.9825)
+Saved to models\best_model.joblib
