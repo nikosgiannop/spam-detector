@@ -3,29 +3,29 @@ classifier.py
 
 Loads the preprocessed emails.csv and trains two spam classifiers.
 
-Pipeline role (L2 - separation of concerns):
+Pipeline role (Lecture 2 - separation of concerns):
   parse_dataset.py  → raw .txt → preprocessing → emails.csv (clean text)
   classifier.py     → emails.csv → TF-IDF features → model → evaluation
 
 Models trained:
-  1. Multinomial Naive Bayes  - fast, strong baseline for text (L3: supervised)
-  2. Linear SVM               - better boundary separation (L3: supervised, SVM)
+  1. Multinomial Naive Bayes  - fast, strong baseline for text (Lecture3: supervised)
+  2. Linear SVM               - better boundary separation (Lecture3: supervised, SVM)
 
-Evaluation (L5 apo zarra):
+Evaluation (Lecture 5):
   Cross-validation F1  → unbiased estimate on training set
   Test Precision/Recall/F1 → final performance on unseen data
   Confusion Matrix     → see exactly where the model makes mistakes
 
-Best model selected by F1 (not accuracy) - correct for imbalanced classes (L5).
+Best model selected by F1 (not accuracy) - correct for imbalanced classes (Lecture5).
 
-# Task 2 (assignment brief): "extract message structure features"
+# Task 2: extract message structure features
     # TESTED — structural features do NOT discriminate Nigerian Prince spam:
     #
     #    Feature         Ham    Spam   Expected   Result
-    #    caps_ratio      0.079  0.066  spam>ham   ❌ reversed
-    #    exclamations    2.698  0.726  spam>ham   ❌ reversed
-    #    dollar_signs    0.940  1.345  spam>ham   ✅ only useful one
-    #    url_count       3.088  2.222  spam>ham   ❌ reversed
+    #    caps_ratio      0.079  0.066  spam>ham   reversed
+    #    exclamations    2.698  0.726  spam>ham   reversed
+    #    dollar_signs    0.940  1.345  spam>ham   only useful one
+    #    url_count       3.088  2.222  spam>ham   reversed
     #
     # WHY: Nigerian Prince emails mimic formal correspondence (Lecture 5 :
     # "Attackers adapt — evasion: changing features to look legitimate")
@@ -50,7 +50,7 @@ from sklearn.metrics import (
     classification_report,
     confusion_matrix,
     accuracy_score,
-        f1_score,          # added - needed for best model selection (L5)
+        f1_score,          # added - needed for best model selection (Lecture 5)
 )
 
 #visualization tools
@@ -65,7 +65,7 @@ MODEL_DIR = Path("models")    #folder where models & plots will be saved
 MODEL_DIR.mkdir(exist_ok=True)
  
 DATASET   = DATA_DIR / "emails.csv"
-TEST_SIZE = 0.2       #80% train, 20% test (allakste to an den sas aresei)
+TEST_SIZE = 0.2       #80% train, 20% test
 RANDOM_STATE = 42     #orisa to random state gia reproducibility
  
 #load data function
@@ -84,26 +84,20 @@ def load_data():
     return df
  
 
-#function for building pipelines for the models 
-
-#H build_pipelines eixe thema!!! prin: to best model epilegetai me accuracy anti gia F1 
 
 def build_pipelines() -> dict[str, Pipeline]:
     #Lecture 2: Feature extraction ->TF-IDF converts raw text to numerical
     #vectors based on word frequency (TF) and inverse document frequency (IDF).
-    #IDF meiwnei thn epirroh leksewn pou emfanizontai pantou (the, and ..)
-    #kai enisxuei xarakthristikes lekseis
+
 
 
     vectoriser = dict(
         analyzer="word",
         ngram_range=(1, 2),      # L5: unigrams + bigrams "bank transfer", "million dollars"
-        max_features=56_000,     # # covers full vocabulary after min_df=2 filtering
-        sublinear_tf=True,       # log(TF) αντί raw count — μειώνει dominance πολυσύχναστων λέξεων
-        min_df=2,                # Agnoise tis lekseis pou emfanizontai mono mia fora (noise)
+        max_features=56_000,     # covers full vocabulary after min_df=2 filtering
+        sublinear_tf=True,      
+        min_df=2,                
     )
-
-    #EDW EINAI SHMANTIKO TO CHECK GIA TOUS ARITHMOUS - STIS DIAFANEIES LEEI  -> Tuning: choose hyperparameters based on data, not guesswork
 
 
     return {
@@ -111,15 +105,12 @@ def build_pipelines() -> dict[str, Pipeline]:
 
         "Naive Bayes": Pipeline([
             ("tfidf", TfidfVectorizer(**vectoriser)),
-            #MultinomialNB: κατάλληλο για word count features (L3: text classification)
-            #alpha=0.1: Laplace smoothing — αποτρέπει zero probability για άγνωστες λέξεις
+
             ("clf",   MultinomialNB(alpha=0.1)),
         ]),
         "Linear SVM": Pipeline([
             ("tfidf", TfidfVectorizer(**vectoriser)),
-            #LinearSVC: βρίσκει hyperplane που μεγιστοποιεί margin μεταξύ ham/spam (L3: SVM)
-            #C=1.0: regularization — ισορροπία μεταξύ margin και misclassification
-            #L2 ΣΗΜΕΙΩΣΕΩΝ: SVM χρειάζεται scaling — το TF-IDF το κάνει ήδη αυτό εδώ
+
             ("clf",   LinearSVC(C=1.0, max_iter=2000, random_state=RANDOM_STATE)),
         ]),
     }
@@ -132,8 +123,8 @@ before
         analyzer="word",
         ngram_range=(1, 2),      # L5: unigrams + bigrams "bank transfer", "million dollars"
         max_features=30_000,     # limit vocabulary για performance
-        sublinear_tf=True,       # log(TF) αντί raw count — μειώνει dominance πολυσύχναστων λέξεων
-        min_df=2,                # Agnoise tis lekseis pou emfanizontai mono mia fora (noise)
+        sublinear_tf=True,       
+        min_df=2,                
     )
 
 """
@@ -144,20 +135,20 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 df = pd.read_csv('data/emails.csv')
 vec = TfidfVectorizer(analyzer='word', ngram_range=(1,2), min_df=2)
 vec.fit(df['text'])
-print('Πραγματικό vocabulary size:', len(vec.vocabulary_))
+print('real vocabulary size:', len(vec.vocabulary_))
 "
 Unigrams mono:        48,919
-Unigrams + bigrams:  214,177  ← pragmatiko vocabulary
-Με min_df=2:          56,184  ← auto xrhsimopoiei o kvdikas
-max_features:         30,000  ← to orio pou exoyme
+Unigrams + bigrams:  214,177  ← real vocabulary
+Με min_df=2:          56,184  ← what the code uses
+max_features:         30,000  ← the limit we had
 
-ti thema uphrxe prin:
+the issue before:
 
-min_df=2 meiwnei to voc apo 214,177 se 56,184 lekseis
-ALLA to max_features=30,000 kovei ta epipleon  26,184 pio spania features
-ARA KOVOUME TO 47% TOU XRHSIMOU VOC
+min_df=2 lowers voc 214,177 -> 56,184 words
+but max_features=30,000  ignores 26,184 rare features
+so we ignore 47%  VOC
 
-ara vasei twn pragmatikwn dedomenwn: max_features=56_000
+so based on the real data: max_features=56_000
 
 """
 
@@ -177,7 +168,7 @@ def plot_confusion_matrix(y_true, y_pred, model_name: str):
     plt.tight_layout()
     path = MODEL_DIR / f"confusion_{model_name.lower().replace(' ', '_')}.png"
     plt.savefig(path, dpi=150)
-    print(f"  Saved confusion matrix in {path}")                        #plots gia confusion matrix klp
+    print(f"  Saved confusion matrix in {path}")                        
     plt.close()
  
  
@@ -193,7 +184,7 @@ def evaluate(pipeline: Pipeline, X_test, y_test, model_name: str) -> float: #add
 
     plot_confusion_matrix(y_test, y_pred, model_name)
 
-    return f1_score(y_test, y_pred) #pleon epistrefei F1 score gia na mhn ksanaginetai prediction
+    return f1_score(y_test, y_pred) 
  
 
 #main function
@@ -229,19 +220,16 @@ def main():
    #         best_acc, best_name, best_pipeline = acc, name, pipeline
  
 
-    # Lecture 5: επιλογή best model με F1, όχι accuracy
-    # Accuracy παραπλανά σε imbalanced data — F1 συνεπές με cross-val
-        test_f1 = evaluate(pipeline, X_test, y_test, name)  #N: upologizoume f1
+        test_f1 = evaluate(pipeline, X_test, y_test, name) 
 
         if test_f1 > best_f1:
             best_f1 = test_f1
             best_name = name
             best_pipeline = pipeline
         
-    #save best model
+
     model_path = MODEL_DIR / "best_model.joblib"
     joblib.dump(best_pipeline, model_path)
-    # print(f"\nBest model: {best_name} (accuracy={best_acc:.4f})")
     print(f"\nBest model: {best_name} (F1={best_f1:.4f})")
     print(f"Saved to {model_path}")
  
@@ -250,9 +238,5 @@ if __name__ == "__main__":
     main()
 
 
-    #  ΣΥΓΚΡΙΣΗ ΠΡΙΝ και ΜΕΤΑ ΤΙΣ ΑΛΛΑΓΕΣ:
-#  Naive Bayes  - πριν F1: 0.97  | μετα F1: 0.97  (ιδιο)
-#  Linear SVM   - πριν F1: 0.99  | μετα F1: 0.9913 (καλυτερο)
-#  Βελτιωση λογω: (1) max_features=56_000 αντι 30_000 (δινουμε πληρες vocabulary)
-#                (2) spaCy entities (ENT_MONEY, ENT_PERCENT) - διακριτικη ικανοτητα
-#  Best model τωρα επιλεγεται με F1 (οχι accuracy) - συμφωνα με Lecture 5
+#  Naive Bayes  - πριν F1: 0.97  | μετα F1: 0.97  (same)
+#  Linear SVM   - πριν F1: 0.99  | μετα F1: 0.9913 (better)
