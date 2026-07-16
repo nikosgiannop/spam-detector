@@ -1,7 +1,7 @@
 """
 classifier.py
 
-G: Loads the preprocessed emails.csv and trains two spam classifiers.
+Loads the preprocessed emails.csv and trains two spam classifiers.
 
 Pipeline role (L2 - separation of concerns):
   parse_dataset.py  → raw .txt → preprocessing → emails.csv (clean text)
@@ -181,7 +181,7 @@ def plot_confusion_matrix(y_true, y_pred, model_name: str):
     plt.close()
  
  
-def evaluate(pipeline: Pipeline, X_test, y_test, model_name: str) -> float: #N: added return type for F1 score
+def evaluate(pipeline: Pipeline, X_test, y_test, model_name: str) -> float: #added return type for F1 score
     y_pred = pipeline.predict(X_test)
 
     print(f"\n{'='*50}")
@@ -193,7 +193,7 @@ def evaluate(pipeline: Pipeline, X_test, y_test, model_name: str) -> float: #N: 
 
     plot_confusion_matrix(y_test, y_pred, model_name)
 
-    return f1_score(y_test, y_pred) #N: pleon epistrefei F1 score gia na mhn ksanaginetai prediction
+    return f1_score(y_test, y_pred) #pleon epistrefei F1 score gia na mhn ksanaginetai prediction
  
 
 #main function
@@ -250,7 +250,7 @@ if __name__ == "__main__":
     main()
 
 
-    # G: ΣΥΓΚΡΙΣΗ ΠΡΙΝ και ΜΕΤΑ ΤΙΣ ΑΛΛΑΓΕΣ:
+    #  ΣΥΓΚΡΙΣΗ ΠΡΙΝ και ΜΕΤΑ ΤΙΣ ΑΛΛΑΓΕΣ:
 #  Naive Bayes  - πριν F1: 0.97  | μετα F1: 0.97  (ιδιο)
 #  Linear SVM   - πριν F1: 0.99  | μετα F1: 0.9913 (καλυτερο)
 #  Βελτιωση λογω: (1) max_features=56_000 αντι 30_000 (δινουμε πληρες vocabulary)
