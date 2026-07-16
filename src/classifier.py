@@ -18,8 +18,8 @@ Evaluation (L5 apo zarra):
 
 Best model selected by F1 (not accuracy) - correct for imbalanced classes (L5).
 
-# G: Task 2 (assignment brief): "extract message structure features"
-    # G: TESTED — structural features do NOT discriminate Nigerian Prince spam:
+# Task 2 (assignment brief): "extract message structure features"
+    # TESTED — structural features do NOT discriminate Nigerian Prince spam:
     #
     #    Feature         Ham    Spam   Expected   Result
     #    caps_ratio      0.079  0.066  spam>ham   ❌ reversed
@@ -27,10 +27,10 @@ Best model selected by F1 (not accuracy) - correct for imbalanced classes (L5).
     #    dollar_signs    0.940  1.345  spam>ham   ✅ only useful one
     #    url_count       3.088  2.222  spam>ham   ❌ reversed
     #
-    # G: WHY: Nigerian Prince emails mimic formal correspondence (L5 Zarras:
-    # G: "Attackers adapt — evasion: changing features to look legitimate")
-    # G: DECISION: structural features omitted — would confuse classifier.
-    # G: Limitation noted for report (Task 8: limitations & future work).
+    # WHY: Nigerian Prince emails mimic formal correspondence (Lecture 5 :
+    # "Attackers adapt — evasion: changing features to look legitimate")
+    # DECISION: structural features omitted — would confuse classifier.
+    # Limitation noted for report (Task 8: limitations & future work).
 
 
 """
@@ -50,7 +50,7 @@ from sklearn.metrics import (
     classification_report,
     confusion_matrix,
     accuracy_score,
-        f1_score,          # G: added - needed for best model selection (L5)
+        f1_score,          # added - needed for best model selection (L5)
 )
 
 #visualization tools
@@ -77,22 +77,22 @@ def load_data():
             "Run  python src/parse_dataset.py  first."
         )
     df = pd.read_csv(DATASET)
-    #G removes rows with missing text or labels (data quality check)
+    #removes rows with missing text or labels (data quality check)
     df = df.dropna(subset=["text", "label"])
-    #G prints dataset distribution (spam vs ham) for verification
+    #prints dataset distribution (spam vs ham) for verification
     print(f"Loaded {len(df)} emails  (ham={(df.label==0).sum()}, spam={(df.label==1).sum()})")
     return df
  
 
 #function for building pipelines for the models 
 
-#G: H build_pipelines eixe thema!!! prin: to best model epilegetai me accuracy anti gia F1 
+#H build_pipelines eixe thema!!! prin: to best model epilegetai me accuracy anti gia F1 
 
 def build_pipelines() -> dict[str, Pipeline]:
-    #G L2 apo zarra: Feature extraction ->TF-IDF converts raw text to numerical
-    #G vectors based on word frequency (TF) and inverse document frequency (IDF).
-    #G IDF meiwnei thn epirroh leksewn pou emfanizontai pantou (the, and ..)
-    #G kai enisxuei xarakthristikes lekseis
+    #L2 apo zarra: Feature extraction ->TF-IDF converts raw text to numerical
+    #vectors based on word frequency (TF) and inverse document frequency (IDF).
+    #IDF meiwnei thn epirroh leksewn pou emfanizontai pantou (the, and ..)
+    #kai enisxuei xarakthristikes lekseis
 
 
     vectoriser = dict(
@@ -103,23 +103,23 @@ def build_pipelines() -> dict[str, Pipeline]:
         min_df=2,                # Agnoise tis lekseis pou emfanizontai mono mia fora (noise)
     )
 
-    #G EDW EINAI SHMANTIKO TO CHECK GIA TOUS ARITHMOUS - STIS DIAFANEIES LEEI O ZARRAS -> Tuning: choose hyperparameters based on data, not guesswork
+    #EDW EINAI SHMANTIKO TO CHECK GIA TOUS ARITHMOUS - STIS DIAFANEIES LEEI  -> Tuning: choose hyperparameters based on data, not guesswork
 
 
     return {
-        #G L3 Zarras: Supervised learning kai ta 2 einai supervised classifiers. labeled data (ham=0, spam=1)
+        #Lecture 3 : Supervised learning kai ta 2 einai supervised classifiers. labeled data (ham=0, spam=1)
 
         "Naive Bayes": Pipeline([
             ("tfidf", TfidfVectorizer(**vectoriser)),
-            #GMultinomialNB: κατάλληλο για word count features (L3: text classification)
-            #G alpha=0.1: Laplace smoothing — αποτρέπει zero probability για άγνωστες λέξεις
+            #MultinomialNB: κατάλληλο για word count features (L3: text classification)
+            #alpha=0.1: Laplace smoothing — αποτρέπει zero probability για άγνωστες λέξεις
             ("clf",   MultinomialNB(alpha=0.1)),
         ]),
         "Linear SVM": Pipeline([
             ("tfidf", TfidfVectorizer(**vectoriser)),
-            #G LinearSVC: βρίσκει hyperplane που μεγιστοποιεί margin μεταξύ ham/spam (L3: SVM)
-            #G C=1.0: regularization — ισορροπία μεταξύ margin και misclassification
-            #G ⚠ L2 ΣΗΜΕΙΩΣΕΩΝ: SVM χρειάζεται scaling — το TF-IDF το κάνει ήδη αυτό εδώ
+            #LinearSVC: βρίσκει hyperplane που μεγιστοποιεί margin μεταξύ ham/spam (L3: SVM)
+            #C=1.0: regularization — ισορροπία μεταξύ margin και misclassification
+            #L2 ΣΗΜΕΙΩΣΕΩΝ: SVM χρειάζεται scaling — το TF-IDF το κάνει ήδη αυτό εδώ
             ("clf",   LinearSVC(C=1.0, max_iter=2000, random_state=RANDOM_STATE)),
         ]),
     }
@@ -211,7 +211,7 @@ def main():
  
     #training and evaluating each model
     pipelines = build_pipelines()
-    #G best_name, best_pipeline, best_acc = None, None, 0.0
+    # best_name, best_pipeline, best_acc = None, None, 0.0
     best_name, best_pipeline, best_f1 = None, None, 0.0
 
     for name, pipeline in pipelines.items():
@@ -223,14 +223,14 @@ def main():
         pipeline.fit(X_train, y_train)
         
  
- #G
+ 
  #acc = accuracy_score(y_test, pipeline.predict(X_test))
   #      if acc > best_acc:
    #         best_acc, best_name, best_pipeline = acc, name, pipeline
  
 
-    # G: L5 (Zarras): επιλογή best model με F1, όχι accuracy
-    # G: Accuracy παραπλανά σε imbalanced data — F1 συνεπές με cross-val
+    # Lecture 5: επιλογή best model με F1, όχι accuracy
+    # Accuracy παραπλανά σε imbalanced data — F1 συνεπές με cross-val
         test_f1 = evaluate(pipeline, X_test, y_test, name)  #N: upologizoume f1
 
         if test_f1 > best_f1:
@@ -241,7 +241,7 @@ def main():
     #save best model
     model_path = MODEL_DIR / "best_model.joblib"
     joblib.dump(best_pipeline, model_path)
-    #G print(f"\nBest model: {best_name} (accuracy={best_acc:.4f})")
+    # print(f"\nBest model: {best_name} (accuracy={best_acc:.4f})")
     print(f"\nBest model: {best_name} (F1={best_f1:.4f})")
     print(f"Saved to {model_path}")
  
@@ -251,8 +251,8 @@ if __name__ == "__main__":
 
 
     # G: ΣΥΓΚΡΙΣΗ ΠΡΙΝ και ΜΕΤΑ ΤΙΣ ΑΛΛΑΓΕΣ:
-# G: Naive Bayes  - πριν F1: 0.97  | μετα F1: 0.97  (ιδιο)
-# G: Linear SVM   - πριν F1: 0.99  | μετα F1: 0.9913 (καλυτερο)
-# G: Βελτιωση λογω: (1) max_features=56_000 αντι 30_000 (δινουμε πληρες vocabulary)
-# G:                (2) spaCy entities (ENT_MONEY, ENT_PERCENT) - διακριτικη ικανοτητα
-# G: Best model τωρα επιλεγεται με F1 (οχι accuracy) - συμφωνα με L5 του ζαρρα
+#  Naive Bayes  - πριν F1: 0.97  | μετα F1: 0.97  (ιδιο)
+#  Linear SVM   - πριν F1: 0.99  | μετα F1: 0.9913 (καλυτερο)
+#  Βελτιωση λογω: (1) max_features=56_000 αντι 30_000 (δινουμε πληρες vocabulary)
+#                (2) spaCy entities (ENT_MONEY, ENT_PERCENT) - διακριτικη ικανοτητα
+#  Best model τωρα επιλεγεται με F1 (οχι accuracy) - συμφωνα με Lecture 5
