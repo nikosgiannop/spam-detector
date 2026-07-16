@@ -7,14 +7,14 @@ Labels:
 0 = ham  
 1 = spam 
 
-G: Pipeline role (L2 - separation of concerns):
-G:   parse_dataset.py  → raw .txt → preprocessing → emails.csv (clean text)
-G:   classifier.py     → emails.csv → TF-IDF features → model → evaluation
+Pipeline role (L2 - separation of concerns):
+parse_dataset.py  → raw .txt → preprocessing → emails.csv (clean text)
+classifier.py     → emails.csv → TF-IDF features → model → evaluation
  
 """
  
 #dependencies/imports
-from cProfile import label
+#from cProfile import label #no need for that anymore
 
 import pandas as pd
 import re                    #G NEW ADDITION
@@ -30,14 +30,14 @@ nlp = spacy.load("en_core_web_sm")
 DATA_DIR = Path("data")
 DELIMITER = "-> END OF EMAIL <-"        #auto pou orisate
  
-#G: Dataset composition - emphasis on Nigerian Prince scam (Task 1, assignment brief):
-#G: - ham500.txt             → 500 legitimate emails (label=0)
-#G: - spam100.txt            → 100 generic spam emails (label=1)
-#G: - nigerian_format400.txt → 400 Nigerian Prince advance-fee fraud (label=1)
-#G: - nigerian_format80.txt  →  80 shorter Nigerian Prince variants (label=1)
-#G: Total: 500 ham vs 580 spam - roughly balanced, no oversampling needed
-#G: NOTES: Spam is intentionally Nigerian-heavy per assignment brief.
-#G:       Limitation: model may not generalise well to other spam types.
+# Dataset composition - emphasis on Nigerian Prince scam (Task 1, assignment brief):
+# ham500.txt             → 500 legitimate emails (label=0)
+# spam100.txt            → 100 generic spam emails (label=1)
+# nigerian_format400.txt → 400 Nigerian Prince advance-fee fraud (label=1)
+# nigerian_format80.txt  →  80 shorter Nigerian Prince variants (label=1)
+# Total: 500 ham vs 580 spam - roughly balanced, no oversampling needed
+# NOTES: Spam is intentionally Nigerian-heavy per assignment brief.
+#       Limitation: model may not generalise well to other spam types.
 
 FILES = {
     #file name              labels
@@ -47,14 +47,9 @@ FILES = {
     "nigerian_format80.txt":  1,
 }
 
-#G: Ti leei h theoria: to dataset exei 500 ham vs 580 spam, pou einai sxetika balanced, opote de xreiazetai oversampling.
-#G: An htan 500 vs 50, tha eixame to provlhma imbalance, opws anaferetai sto Lecture 5.
- 
 
-#G  NEW ADDITION preprocessing
-#G Στο L2 leei o zarras (Foundations of AI and ML):Text data → χρειάζεται tokenization, normalization, feature extraction 
 
-def clean_email(text: str) -> str: #G: To vazw edw kai oxi ston epomeno kwdika giati einai pio swsto sa logikh to preprocessing na bainei edw
+def clean_email(text: str) -> str: 
     """
     Basic text preprocessing before feature extraction.
     Keeps semantic content, removes noise.
@@ -66,7 +61,7 @@ def clean_email(text: str) -> str: #G: To vazw edw kai oxi ston epomeno kwdika g
     text = re.sub(r'\s+', ' ', text)           # normalize whitespace
     return text.strip()
 
-#G  extract_entities
+
 
 """
 pws ginotan prin kai giati htan lathos:
@@ -111,11 +106,11 @@ def extract_entities(text: str) -> str:
     - GPE: 'NIGERIA', 'BANK OF AFRICA'
 
     """
-    doc = nlp(text[:100_000])  #G: limit length to avoid memory issues on very long emails
-    #G: Safety limit: mean email = ~3,600 chars, only 2/1080 emails exceed 100k.
-    #G: Truncation affects <0.2% of dataset - acceptable tradeoff for memory safety.
+    doc = nlp(text[:100_000])  # limit length to avoid memory issues on very long emails
+    # Safety limit: mean email = ~3,600 chars, only 2/1080 emails exceed 100k.
+    # Truncation affects <0.2% of dataset - acceptable tradeoff for memory safety.
 
-    #G: pws dialeksame to 100k :
+    # pws dialeksame to 100k :
 
     """
     
@@ -145,10 +140,10 @@ def extract_entities(text: str) -> str:
     return text + " " + " ".join(entity_tokens) if entity_tokens else text
 
 
-#G: Verified on dataset - Nigerian Prince emails show:
-#G: ENT_MONEY (x3), ENT_PERCENT (x4), ENT_PERSON, ENT_GPE, ENT_ORG
-#G: These are exactly the patterns described in L5 (Zarras) for fraud detection.
-#G: TF-IDF alone cannot capture semantic entity types — spaCy fills this gap.
+# Verified on dataset - Nigerian Prince emails show:
+# ENT_MONEY (x3), ENT_PERCENT (x4), ENT_PERSON, ENT_GPE, ENT_ORG
+# These are exactly the patterns described in L5 (Zarras) for fraud detection.
+# TF-IDF alone cannot capture semantic entity types — spaCy fills this gap.
 
 
 #parsing
@@ -157,7 +152,7 @@ def extract_entities(text: str) -> str:
 
 def parse_file(filepath: Path, label: int) -> list[dict]:
 
-    #read file safely (replace invalid characters instead of crashing)  h malakia crashare kai to vrhka meta apo mish wra :(
+    #read file safely (replace invalid characters instead of crashing)
     text = filepath.read_text(encoding="utf-8", errors="replace")
 
     #split file into individual emails
@@ -208,12 +203,12 @@ if __name__ == "__main__":
     print(f"\nSaved to {out}")
 
     # === Entity Verification (L4: verify features are reproducible) ===
-    # G: Results confirm entities discriminate spam from ham:
-    # G: ENT_PERCENT : +930% in spam (Nigerian % promises)
-    # G: ENT_MONEY   : +55%  in spam (large sum promises)  
-    # G: ENT_GPE     : +102% in spam (Nigeria, Africa references)
-    # G: ENT_DATE    : much higher in ham (newsletters, legitimate scheduling)
-    # G: Coverage: ~97% both classes — entities present in almost all emails
+    #  Results confirm entities discriminate spam from ham:
+    #  ENT_PERCENT : +930% in spam (Nigerian % promises)
+    #  ENT_MONEY   : +55%  in spam (large sum promises)  
+    #  ENT_GPE     : +102% in spam (Nigeria, Africa references)
+    #  ENT_DATE    : much higher in ham (newsletters, legitimate scheduling)
+    #  Coverage: ~97% both classes — entities present in almost all emails
     
     #import re
     #from collections import Counter
@@ -240,9 +235,9 @@ if __name__ == "__main__":
         print(f"  {ent:<20} {count}")
 
 
-    # G Shmantiko eurhma: to ent_percent einai 10x pio suxno sto spam. o zarras to leei sto L5: Ta Nigerian Prince emails uposxontai pososta kerdous
+    #  Shmantiko eurhma: to ent_percent einai 10x pio suxno sto spam. o zarras to leei sto L5: Ta Nigerian Prince emails uposxontai pososta kerdous
    
-    # G mini anakefalaiwsh: 
+    #  mini anakefalaiwsh: 
 
     # ti kseroume twra: 
     # to spacy entopizei entities swsta
