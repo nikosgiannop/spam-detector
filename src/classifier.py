@@ -89,7 +89,7 @@ def load_data():
 #H build_pipelines eixe thema!!! prin: to best model epilegetai me accuracy anti gia F1 
 
 def build_pipelines() -> dict[str, Pipeline]:
-    #L2 apo zarra: Feature extraction ->TF-IDF converts raw text to numerical
+    #Lecture 2: Feature extraction ->TF-IDF converts raw text to numerical
     #vectors based on word frequency (TF) and inverse document frequency (IDF).
     #IDF meiwnei thn epirroh leksewn pou emfanizontai pantou (the, and ..)
     #kai enisxuei xarakthristikes lekseis
